@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="kn" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ವಿಜಯವಾಣಿ ದಿನಪತ್ರಿಕೆ ಡೌನ್‌ಲೋಡರ್ | Vijayavani Newspaper & E-Paper Suite</title>
+    
+    <!-- Modern Google Fonts: Inter, Outfit, and Noto Sans Kannada -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Kannada:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Application Stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <!-- Background Ambient Glows -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="ambient-glow glow-3"></div>
+
+    <!-- Main Navigation Bar -->
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="brand">
+                <div class="brand-logo">
+                    <span class="logo-icon">🗞️</span>
+                </div>
+                <div class="brand-text">
+                    <div class="brand-title">
+                        <span class="kannada-logo">ವಿಜಯವಾಣಿ</span>
+                        <span class="brand-badge">E-Paper Pro</span>
+                    </div>
+                    <span class="brand-sub">Vijayavani Newspaper Archive & Image Downloader</span>
+                </div>
+            </div>
+
+            <div class="nav-tabs" role="tablist">
+                <button class="nav-tab active" data-tab="epaper" id="tab-epaper" role="tab">
+                    <span class="tab-icon">📰</span>
+                    <span>ಇ-ಪೇಪರ್ (E-Paper)</span>
+                </button>
+                <button class="nav-tab" data-tab="archives" id="tab-archives" role="tab">
+                    <span class="tab-icon">📁</span>
+                    <span>ಆರ್ಕೈವ್ಸ್ (Archives)</span>
+                    <span class="tab-badge" id="archives-count-badge">0</span>
+                </button>
+                <button class="nav-tab" data-tab="news" id="tab-news" role="tab">
+                    <span class="tab-icon">🌐</span>
+                    <span>ಸುದ್ದಿ ಪೋರ್ಟಲ್ (News)</span>
+                </button>
+            </div>
+
+            <div class="nav-meta">
+                <div class="status-indicator online" id="server-status">
+                    <span class="pulse-dot"></span>
+                    <span class="status-text">Server Online</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- TAB 1: E-PAPER SCRAPER (PRIMARY USER GOAL)                      -->
+        <!-- ============================================================== -->
+        <section class="tab-pane active" id="pane-epaper">
+            <!-- Hero Title & Description -->
+            <div class="section-hero">
+                <div class="hero-badge">
+                    <span>✨ ಅಧಿಕೃತ ವಿಜಯವಾಣಿ ಇ-ಪೇಪರ್ ಡೌನ್‌ಲೋಡರ್</span>
+                </div>
+                <h1 class="hero-title">
+                    ದಿನಾಂಕ ಆಯ್ಕೆಮಾಡಿ ಮತ್ತು <span class="highlight-text">ಸಂಪೂರ್ಣ ಪತ್ರಿಕೆ</span> ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ
+                </h1>
+                <p class="hero-subtitle">
+                    Select a date and edition to download the <strong>entire daily newspaper</strong> (all pages in full original resolution, not just the front page).
+                </p>
+            </div>
+
+            <!-- Interactive Scraper Control Card -->
+            <div class="glass-card scraper-card">
+                <div class="card-inner">
+                    <!-- Step 1: Date Selection -->
+                    <div class="control-group">
+                        <div class="group-header">
+                            <span class="step-num">1</span>
+                            <div>
+                                <label class="group-title" for="scrape-date">ದಿನಾಂಕ ಆಯ್ಕೆಮಾಡಿ (Select Publication Date)</label>
+                                <span class="group-desc">Choose the newspaper date you wish to download</span>
+                            </div>
+                        </div>
+
+                        <div class="date-input-wrapper">
+                            <div class="date-field">
+                                <span class="calendar-icon">📅</span>
+                                <input type="date" id="scrape-date" class="date-picker-input">
+                            </div>
+                            
+                            <!-- Quick Date Presets -->
+                            <div class="date-presets" id="date-presets">
+                                <button type="button" class="preset-pill active" data-preset="today">
+                                    ಇಂದು (Today)
+                                </button>
+                                <button type="button" class="preset-pill" data-preset="yesterday">
+                                    ನಿನ್ನೆ (Yesterday)
+                                </button>
+                                <button type="button" class="preset-pill" data-preset="2days">
+                                    2 ದಿನಗಳ ಹಿಂದೆ (2 Days Ago)
+                                </button>
+                                <button type="button" class="preset-pill" data-preset="sunday">
+                                    ಕಳೆದ ಭಾನುವಾರ (Sunday)
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <!-- Step 2: Edition Selection -->
+                    <div class="control-group">
+                        <div class="group-header">
+                            <span class="step-num">2</span>
+                            <div>
+                                <label class="group-title">ಆವೃತ್ತಿ ಆಯ್ಕೆಮಾಡಿ (Select Edition / Region)</label>
+                                <span class="group-desc">Pick your desired regional print edition</span>
+                            </div>
+                        </div>
+
+                        <div class="editions-grid" id="editions-container">
+                            <!-- Injected dynamically via app.js -->
+                        </div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <!-- Step 3: Scope Selection (Whole Newspaper vs Front Page) -->
+                    <div class="control-group">
+                        <div class="group-header">
+                            <span class="step-num">3</span>
+                            <div>
+                                <label class="group-title">ಪುಟಗಳ ಶ್ರೇಣಿ (Page Scope)</label>
+                                <span class="group-desc">Choose whether to fetch all pages or specific pages</span>
+                            </div>
+                        </div>
+
+                        <div class="scope-options">
+                            <label class="scope-card selected">
+                                <input type="radio" name="page-scope" value="all" checked>
+                                <div class="scope-content">
+                                    <div class="scope-top">
+                                        <span class="scope-icon">📚</span>
+                                        <span class="scope-name">ಇಡೀ ದಿನಪತ್ರಿಕೆ (Entire Newspaper)</span>
+                                        <span class="recommend-tag">ಶಿಫಾರಸು ಮಾಡಲಾಗಿದೆ (Recommended)</span>
+                                    </div>
+                                    <p class="scope-text">
+                                        Downloads <strong>ALL pages</strong> of that day (Pages 1 to 14/16/etc.) in original crystal-clear resolution.
+                                    </p>
+                                </div>
+                            </label>
+
+                            <label class="scope-card">
+                                <input type="radio" name="page-scope" value="front">
+                                <div class="scope-content">
+                                    <div class="scope-top">
+                                        <span class="scope-icon">📄</span>
+                                        <span class="scope-name">ಮೊದಲ ಪುಟ ಮಾತ್ರ (Front Page Only)</span>
+                                    </div>
+                                    <p class="scope-text">
+                                        Downloads only the cover / Page 1 of the chosen edition.
+                                    </p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Action Bar -->
+                    <div class="action-bar">
+                        <button type="button" class="btn btn-secondary" id="btn-preview-pages">
+                            <span class="btn-icon">👁️</span>
+                            <span>ಪುಟಗಳ ಪೂರ್ವವೀಕ್ಷಣೆ (Preview Pages)</span>
+                        </button>
+
+                        <button type="button" class="btn btn-primary" id="btn-start-scrape">
+                            <span class="btn-icon">📥</span>
+                            <span class="btn-text">ಸಂಪೂರ್ಣ ಪತ್ರಿಕೆ ಡೌನ್‌ಲೋಡ್ (Fetch Whole Newspaper)</span>
+                            <span class="btn-glow"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Download Progress Panel (Hidden by default, shown while fetching) -->
+            <div class="glass-card progress-panel" id="progress-panel" style="display: none;">
+                <div class="progress-header">
+                    <div class="progress-title-block">
+                        <div class="spinner-ring" id="progress-spinner"></div>
+                        <div>
+                            <h3 class="progress-title" id="progress-title">ಡೌನ್‌ಲೋಡ್ ಪ್ರಕ್ರಿಯೆ ನಡೆಯುತ್ತಿದೆ...</h3>
+                            <span class="progress-subtitle" id="progress-subtitle">Connecting to Vijayavani ePaper servers...</span>
+                        </div>
+                    </div>
+                    <div class="progress-stats">
+                        <span class="percent-badge" id="progress-percent">0%</span>
+                    </div>
+                </div>
+
+                <div class="progress-bar-track">
+                    <div class="progress-bar-fill" id="progress-bar-fill" style="width: 0%;"></div>
+                </div>
+
+                <!-- Real-time Downloaded Thumbnails Stream -->
+                <div class="live-stream-section">
+                    <div class="live-stream-header">
+                        <span class="stream-label">ಡೌನ್‌ಲೋಡ್ ಆಗುತ್ತಿರುವ ಪುಟಗಳು (Live Page Feed):</span>
+                        <span class="stream-count" id="live-stream-count">0/0 Pages</span>
+                    </div>
+                    <div class="live-stream-grid" id="live-stream-grid">
+                        <!-- Thumbnails added dynamically as they download -->
+                    </div>
+                </div>
+
+                <!-- Expandable Console Log -->
+                <details class="console-drawer" id="console-drawer">
+                    <summary class="console-summary">
+                        <span>📋 ವಿವರವಾದ ಲಾಗ್‌ಗಳು (View Activity Logs)</span>
+                        <span class="arrow-indicator">▼</span>
+                    </summary>
+                    <div class="console-box" id="console-logs">
+                        <div class="log-line info">[System] Ready to fetch Vijayavani newspaper pages...</div>
+                    </div>
+                </details>
+            </div>
+
+            <!-- Results & Newspaper Gallery View -->
+            <div class="results-section" id="results-section" style="display: none;">
+                <div class="results-header-bar">
+                    <div class="results-meta">
+                        <div class="success-icon">✓</div>
+                        <div>
+                            <h2 class="results-title" id="results-title">ವಿಜಯವಾಣಿ ಪತ್ರಿಕೆ ಪುಟಗಳು</h2>
+                            <span class="results-subtitle" id="results-subtitle">All pages fetched successfully</span>
+                        </div>
+                    </div>
+
+                    <div class="results-actions">
+                        <button class="btn btn-outline" id="btn-download-all-zip">
+                            <span class="btn-icon">📦</span>
+                            <span>Download All Pages as ZIP (ಜಿಪ್ ಡೌನ್‌ಲೋಡ್)</span>
+                        </button>
+                        <button class="btn btn-primary" id="btn-open-reader-first">
+                            <span class="btn-icon">📖</span>
+                            <span>ಪತ್ರಿಕೆ ಓದಿ (Read Fullscreen)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Grid of Page Cards -->
+                <div class="pages-grid" id="pages-grid">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- TAB 2: ARCHIVES BROWSER                                        -->
+        <!-- ============================================================== -->
+        <section class="tab-pane" id="pane-archives">
+            <div class="section-hero">
+                <div class="hero-badge">
+                    <span>📁 ಸ್ಥಳೀಯ ಆರ್ಕೈವ್‌ಗಳು</span>
+                </div>
+                <h1 class="hero-title">
+                    ಡೌನ್‌ಲೋಡ್ ಆದ <span class="highlight-text">ಪತ್ರಿಕೆಗಳ ಸಂಗ್ರಹ</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Browse, view, or re-download previously fetched Vijayavani newspapers saved on your system.
+                </p>
+            </div>
+
+            <div class="archives-toolbar">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="archive-search" placeholder="Search by date (YYYY-MM-DD) or edition...">
+                </div>
+                <button class="btn btn-secondary" id="btn-refresh-archives">
+                    <span class="btn-icon">🔄</span>
+                    <span>ರಿಫ್ರೆಶ್ (Refresh)</span>
+                </button>
+            </div>
+
+            <div class="archives-grid" id="archives-grid">
+                <!-- Populated dynamically via app.js -->
+            </div>
+
+            <div class="empty-state" id="archives-empty" style="display: none;">
+                <span class="empty-icon">📭</span>
+                <h3>ಇನ್ನೂ ಯಾವುದೇ ಪತ್ರಿಕೆಗಳು ಡೌನ್‌ಲೋಡ್ ಆಗಿಲ್ಲ</h3>
+                <p>No newspaper archives found. Go to the E-Paper tab to fetch your first issue!</p>
+                <button class="btn btn-primary" id="btn-go-to-epaper">
+                    <span>ಪತ್ರಿಕೆ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ (Fetch E-Paper)</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- TAB 3: NEWS PORTAL ARTICLES (BONUS)                           -->
+        <!-- ============================================================== -->
+        <section class="tab-pane" id="pane-news">
+            <div class="section-hero">
+                <div class="hero-badge">
+                    <span>🌐 ವಿಜಯವಾಣಿ.ನೆಟ್ ಪೋರ್ಟಲ್</span>
+                </div>
+                <h1 class="hero-title">
+                    ವೆಬ್‌ಸೈಟ್ ಸುದ್ದಿ ಲೇಖನಗಳು &amp; <span class="highlight-text">ಫೋಟೋಗಳು</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Scrape latest breaking news and category photo galleries with Kannada headlines from vijayavani.net.
+                </p>
+            </div>
+
+            <div class="glass-card news-card">
+                <div class="card-inner">
+                    <div class="news-controls">
+                        <div class="control-group">
+                            <label class="group-title">ವರ್ಗ (News Category):</label>
+                            <div class="category-pills" id="news-categories-container">
+                                <!-- Populated dynamically -->
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="group-title" for="news-limit-input">ಲೇಖನಗಳ ಸಂಖ್ಯೆ (Number of Stories): <span id="news-limit-val">15</span></label>
+                            <input type="range" id="news-limit-input" min="5" max="30" value="15" step="5" class="slider">
+                        </div>
+
+                        <div class="action-bar">
+                            <button class="btn btn-primary" id="btn-scrape-news">
+                                <span class="btn-icon">📸</span>
+                                <span>ಸುದ್ದಿ ಫೋಟೋಗಳನ್ನು ತನ್ನಿ (Fetch News Images)</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- News Results Grid -->
+            <div class="news-results-grid" id="news-results-grid"></div>
+        </section>
+    </main>
+
+    <!-- ================================================================== -->
+    <!-- FULLSCREEN ZOOMABLE NEWSPAPER VIEWER (LIGHTBOX MODAL)               -->
+    <!-- ================================================================== -->
+    <div class="lightbox-modal" id="reader-modal" style="display: none;">
+        <div class="lightbox-backdrop" id="reader-backdrop"></div>
+        
+        <div class="lightbox-content">
+            <!-- Top Controls Header -->
+            <div class="lightbox-header">
+                <div class="lightbox-title-area">
+                    <h3 class="lightbox-title" id="reader-title">ವಿಜಯವಾಣಿ ಪತ್ರಿಕೆ</h3>
+                    <span class="lightbox-badge" id="reader-page-badge">ಪುಟ 1 / 14</span>
+                </div>
+
+                <div class="lightbox-toolbar">
+                    <button class="tool-btn" id="tool-zoom-in" title="Zoom In (+)">
+                        <span>🔍+</span>
+                    </button>
+                    <button class="tool-btn" id="tool-zoom-out" title="Zoom Out (-)">
+                        <span>🔍-</span>
+                    </button>
+                    <button class="tool-btn" id="tool-zoom-reset" title="Reset Zoom (100%)">
+                        <span>1:1</span>
+                    </button>
+                    <button class="tool-btn" id="tool-fit" title="Fit to Screen">
+                        <span>⛶</span>
+                    </button>
+                    <div class="tool-separator"></div>
+                    <a class="tool-btn primary" id="tool-download" title="Download High-Res Image" download>
+                        <span>⬇️ ಡೌನ್‌ಲೋಡ್</span>
+                    </a>
+                    <button class="tool-btn close-btn" id="tool-close" title="Close (Esc)">
+                        <span>✕</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Viewport & Image Canvas -->
+            <div class="lightbox-viewport" id="reader-viewport">
+                <div class="image-wrapper" id="reader-image-wrapper">
+                    <img id="reader-image" src="" alt="Newspaper Page">
+                </div>
+
+                <!-- Left / Right Navigation Controls -->
+                <button class="nav-arrow nav-prev" id="reader-prev" title="Previous Page (Left Arrow)">
+                    <span>‹</span>
+                </button>
+                <button class="nav-arrow nav-next" id="reader-next" title="Next Page (Right Arrow)">
+                    <span>›</span>
+                </button>
+            </div>
+
+            <!-- Bottom Filmstrip Thumbnail Carousel -->
+            <div class="lightbox-filmstrip" id="reader-filmstrip">
+                <!-- Mini thumbnails populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast Element -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Application Script -->
+    <script src="/app.js"></script>
+</body>
+</html>

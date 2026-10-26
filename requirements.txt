@@ -1,0 +1,8 @@
+# Vijayavani Newspaper Scraper Dependencies
+# Note: The scraper is designed to run with Python 3 standard library out-of-the-box!
+# The following optional packages can enhance performance and features:
+
+requests>=2.31.0
+Pillow>=10.0.0
+tqdm>=4.66.0
+beautifulsoup4>=4.12.0
