@@ -45,19 +45,28 @@ web-sceper/
 
 ## 🛠️ Quick Start
 
-### 1. Interactive Mode
-Run the script without any arguments to open the interactive terminal wizard:
+### 1. Web Interface (GUI) — Recommended ⭐
+Run the application server to open the modern browser interface:
+```bash
+./run_ui.sh
+```
+*(or run: `python3 server.py`)*
+
+This starts the local server and automatically opens **http://localhost:8080** in your browser:
+- **Date Picker**: Select any date or pick quick presets (Today, Yesterday, etc.).
+- **Edition Picker**: Select Bengaluru, Hubballi, Namaste Bengaluru, Mysuru, etc.
+- **Fetch All Pages**: Downloads the entire newspaper (all pages, not just the front page).
+- **Interactive Lightbox Reader**: Zoom in, pan, and read pages in full resolution.
+- **1-Click ZIP Download**: Download the entire day's edition in a single `.zip` file.
+- **Archives Browser**: View previously saved newspapers.
+
+---
+
+### 2. Interactive Terminal Wizard
+If you prefer running inside the terminal:
 ```bash
 python3 vijayavani_scraper.py
 ```
-You will be prompted to select:
-1. Fetch latest news images
-2. Fetch news images by category
-3. Fetch breaking news images
-4. Fetch today's e-paper front pages
-5. Fetch all (News + E-Paper)
-
----
 
 ### 2. Command Line Usage
 
